@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Threading;
 
 public class NPC : MonoBehaviour
 {
@@ -57,6 +58,7 @@ public class NPC : MonoBehaviour
 
     public void NextLine()
     {
+        continueButton.SetActive(false);
         if (index < dialogue.Length - 1)
         {
             index++;
