@@ -296,7 +296,7 @@ MonoBehaviour:
   - My name is Amelia!
   - Welcome to Study Camp!
   wordSpeed: 0.06
-  index: 1
+  index: 0
   playerIsClosed: 0
   continueButton: {fileID: 715249463}
   HelpPanel: {fileID: 743273018}

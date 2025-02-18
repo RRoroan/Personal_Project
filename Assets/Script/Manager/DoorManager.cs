@@ -12,7 +12,7 @@ public class DoorManager : MonoBehaviour
 
     private void Awake()
     {
-        controller = FindObjectOfType<SceneController>();
+        controller = SceneController.instance;
     }
     private void Update()
     {
