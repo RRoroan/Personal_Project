@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
         player = FindAnyObjectByType<PlayerController>();
         _camera = FindAnyObjectByType<FollowCamera>();
         _enemyManager = GetComponentInChildren<MiniGameEnemyManager>();
-        _enemyManager.Init(this);
     }
 
     private void Start()

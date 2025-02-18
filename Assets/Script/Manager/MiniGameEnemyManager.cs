@@ -8,17 +8,14 @@ public class MiniGameEnemyManager : MonoBehaviour
     private List<GameObject> enemyPrefabs;
     [SerializeField]
     private List<Rect> spawnArea;
+    [SerializeField]
     private Color gizmoColor = new Color(1, 0, 0, 0.3f);
-    private List<MiniGameEnemy> activeEnemies = new List<MiniGameEnemy>();
 
 
-    GameManager manager;
-
-    public void Init(GameManager gameManager)
+    private void Start()
     {
-        this.manager = gameManager;
+        SpawnRandomEnemy();
     }
-
     private void SpawnRandomEnemy()
     {
         GameObject randomPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
@@ -29,7 +26,6 @@ public class MiniGameEnemyManager : MonoBehaviour
             Random.Range(randomArea.yMin, randomArea.yMax)
             );
         GameObject spawnedEnemy = Instantiate(randomPrefab, new Vector3(randomPosition.x, randomPosition.y), Quaternion.identity);
-        MiniGameEnemy miniGameEnemy = spawnedEnemy.GetComponent<MiniGameEnemy>();
         
     }
 
