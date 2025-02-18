@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NPC : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class NPC : MonoBehaviour
     public bool playerIsClosed;
     [SerializeField] private GameObject continueButton;
     [SerializeField] private GameObject HelpPanel;
+    [SerializeField] private GameObject LobbyButton;
 
     private void Update()
     {
@@ -32,6 +34,15 @@ public class NPC : MonoBehaviour
         if(dialogueText.text == dialogue[index])
         {
             continueButton.SetActive(true);
+        }
+
+        if (index == dialogue.Length - 1)
+        {
+            LobbyButton.SetActive(true);
+        }
+        else
+        {
+            LobbyButton.SetActive(false);
         }
     }
 
