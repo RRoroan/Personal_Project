@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer CharacterRenderer;
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody2D _rigidbody2D;
     private float lastMoveX = 0f;
     private float lastMoveY = -1f;
     private Animator animator;
@@ -17,13 +17,13 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
     }
 
     private void FixedUpdate()
     {
-        rigidbody2D.velocity = movementDirection * speed;
+        _rigidbody2D.velocity = movementDirection * speed;
     }
 
     void OnMove (InputValue inputValue)
