@@ -1,47 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DoorManager : MonoBehaviour
 {
-    [SerializeField] private GameObject HelpPanel;
-    private SceneController controller;
-    [SerializeField] private string SceneName;
-    private bool playerIsClose;
+    [SerializeField] private GameObject GameUI;
+    private MiniGameEnemyManager enemyManager;
+    public bool playerInGameZone { get; private set; }
 
     private void Awake()
     {
-        controller = SceneController.instance;
+        enemyManager = FindObjectOfType<MiniGameEnemyManager>();
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && playerIsClose)
-        {
-            controller.LoadbySceneName(SceneName);
-        }
-
     }
-   
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            playerIsClose = true;
-            HelpPanel.SetActive(true);
+            GameUI.SetActive(true);
+            playerInGameZone = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            playerIsClose = false;
-            HelpPanel.SetActive(false);
-        }
+        GameUI.SetActive(false);
+        playerInGameZone = false;
     }
-
-
 
 }
