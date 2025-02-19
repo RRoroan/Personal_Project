@@ -6,9 +6,9 @@ public class MiniGameEnemy : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer enemyCharater;
     [SerializeField] private float followRange = 15f;
-    [Range(1,5)] [SerializeField] private float speed = 1.5f;
+    [Range(1, 5)][SerializeField] private float speed = 1.5f;
     private Transform target;
-    private bool playerTouch;
+    public bool playerTouch { get; private set; }
     private Vector2 movementDirection = Vector2.zero;
     private Vector2 MovementDirection { get { return movementDirection; } }
     private Rigidbody2D _rigidbody2D;
@@ -32,7 +32,7 @@ public class MiniGameEnemy : MonoBehaviour
     private void Move()
     {
         float distance = DistancetoTarget();
-        
+
         if (distance > followRange)
         {
             movementDirection = Vector2.zero;
@@ -42,7 +42,7 @@ public class MiniGameEnemy : MonoBehaviour
         movementDirection = direction;
     }
 
-    private float DistancetoTarget ()
+    private float DistancetoTarget()
     {
         return Vector3.Distance(transform.position, target.position);
     }
@@ -52,4 +52,15 @@ public class MiniGameEnemy : MonoBehaviour
         return (target.position - transform.position).normalized;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerTouch = true;
+        }
+        else
+        {
+            playerTouch = false;
+        }
+    }
 }

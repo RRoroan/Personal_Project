@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DoorManager : MonoBehaviour
 {
     [SerializeField] private GameObject GameUI;
+    [SerializeField] private TextMeshProUGUI GameTimeText;
     private MiniGameEnemyManager enemyManager;
     public bool playerInGameZone { get; private set; }
+    
+
 
     private void Awake()
     {
@@ -34,6 +39,14 @@ public class DoorManager : MonoBehaviour
     {
         GameUI.SetActive(false);
         playerInGameZone = false;
+
     }
 
+    public void SetGameTime(float gameTime)
+    {
+        GameTimeText.text = gameTime.ToString();
+        int minutes = Mathf.FloorToInt(gameTime / 60);
+        int seconds = Mathf.FloorToInt(gameTime % 60);
+        GameTimeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
 }

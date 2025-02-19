@@ -14,6 +14,7 @@ public class MiniGameEnemyManager : MonoBehaviour
     public PlayerController player { get; private set; }
     private Coroutine spawnWaveCoroutine;
     private List<MiniGameEnemy> activeEnemies = new List<MiniGameEnemy>();
+    private MiniGameEnemy miniGameEnemy;
 
     public void StartGame()
     {
@@ -22,6 +23,7 @@ public class MiniGameEnemyManager : MonoBehaviour
             spawnWaveCoroutine = StartCoroutine(SpawnWave());
         }
     }
+
 
     public void StopGame()
     {
@@ -74,5 +76,17 @@ public class MiniGameEnemyManager : MonoBehaviour
             Vector3 size = new Vector3(area.width, area.height);
             Gizmos.DrawCube(center, size);
         }
+    }
+
+    public bool IsAnyEnemyTouchPlayer()
+    {
+        foreach (MiniGameEnemy enemy in activeEnemies)
+        {
+            if (enemy.playerTouch)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
