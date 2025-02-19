@@ -32,11 +32,6 @@ public class NPC : MonoBehaviour
                 StartCoroutine(Typing());
             }
         }
-        if(dialogueText.text == dialogue[index])
-        {
-            continueButton.SetActive(true);
-        }
-
         if (index == dialogue.Length - 1)
         {
             LobbyButton.SetActive(true);
@@ -49,20 +44,23 @@ public class NPC : MonoBehaviour
 
     IEnumerator Typing()
     {
+        continueButton.SetActive(false);
+        dialogueText.text = string.Empty;
         foreach (char letter in dialogue[index].ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
         }
+        continueButton.SetActive(true);
     }
 
     public void NextLine()
     {
-        continueButton.SetActive(false);
+        
         if (index < dialogue.Length - 1)
         {
             index++;
-            dialogueText.text = " ";
+            dialogueText.text = string.Empty;
             StartCoroutine(Typing());
         }
         else
