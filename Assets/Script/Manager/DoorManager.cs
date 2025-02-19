@@ -9,8 +9,10 @@ using UnityEngine.UI;
 
 public class DoorManager : MonoBehaviour
 {
-    [SerializeField] private GameObject GameUI;
+    [SerializeField] public GameObject GameUI;
     [SerializeField] private TextMeshProUGUI GameTimeText;
+    [SerializeField] public GameObject StartButton;
+    [SerializeField] public GameObject TimeObj;
     private MiniGameEnemyManager enemyManager;
     public bool playerInGameZone { get; private set; }
     
@@ -22,6 +24,7 @@ public class DoorManager : MonoBehaviour
     }
     private void Update()
     {
+
     }
 
     
@@ -31,6 +34,7 @@ public class DoorManager : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             GameUI.SetActive(true);
+            TimeObj.SetActive(true);
             playerInGameZone = true;
         }
     }
@@ -38,15 +42,9 @@ public class DoorManager : MonoBehaviour
     public void OnTriggerExit2D(Collider2D collision)
     {
         GameUI.SetActive(false);
+        TimeObj.SetActive(false);
         playerInGameZone = false;
-
     }
 
-    public void SetGameTime(float gameTime)
-    {
-        GameTimeText.text = gameTime.ToString();
-        int minutes = Mathf.FloorToInt(gameTime / 60);
-        int seconds = Mathf.FloorToInt(gameTime % 60);
-        GameTimeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
+    
 }
