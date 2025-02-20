@@ -17,7 +17,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
         Instance = this;
         _enemyManager = FindObjectOfType<MiniGameEnemyManager>();
