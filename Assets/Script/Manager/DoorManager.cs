@@ -14,7 +14,7 @@ public class DoorManager : MonoBehaviour
     [SerializeField] public GameObject StartButton;
     [SerializeField] public GameObject TimeObj;
     private MiniGameEnemyManager enemyManager;
-    public bool playerInGameZone { get; private set; }
+    public bool playerInGameZone = false;
     
 
 
@@ -27,7 +27,15 @@ public class DoorManager : MonoBehaviour
 
     }
 
-    
+    public void StartGame()
+    {
+        GameUI.SetActive(false);
+    }
+
+    public void StoppingGame()
+    {
+        GameUI.SetActive(true);
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -41,9 +49,13 @@ public class DoorManager : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        GameUI.SetActive(false);
-        TimeObj.SetActive(false);
-        playerInGameZone = false;
+        if (collision.CompareTag("Player"))
+        {
+            GameUI.SetActive(false);
+            playerInGameZone = false;
+            TimeObj.SetActive(false);
+        }
+        
     }
 
     

@@ -14,7 +14,6 @@ public class MiniGameEnemyManager : MonoBehaviour
     public PlayerController player { get; private set; }
     private Coroutine spawnWaveCoroutine;
     private List<MiniGameEnemy> activeEnemies = new List<MiniGameEnemy>();
-    private MiniGameEnemy miniGameEnemy;
     private GameManager gameManager;
 
     public void Init(GameManager gameManager)
@@ -23,8 +22,7 @@ public class MiniGameEnemyManager : MonoBehaviour
     }
     private void Update()
     {
-        if (IsAnyEnemyTouchPlayer())
-            StopGame();
+        
     }
     public void StartGame()
     {
@@ -32,6 +30,8 @@ public class MiniGameEnemyManager : MonoBehaviour
         {
             spawnWaveCoroutine = StartCoroutine(SpawnWave());
         }
+        else 
+            StartCoroutine(SpawnWave());
     }
 
     public void PlayerCatch()
@@ -42,8 +42,9 @@ public class MiniGameEnemyManager : MonoBehaviour
 
     public void StopGame()
     {
-        gameManager.GameOver();
+        StopAllCoroutines();
         RemoveEnemy();
+        gameManager.GameOver();
     }
 
     private void RemoveEnemy()

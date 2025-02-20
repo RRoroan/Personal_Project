@@ -8,15 +8,17 @@ public class MiniGameEnemy : MonoBehaviour
     [SerializeField] private float followRange = 15f;
     [Range(1, 5)][SerializeField] private float speed = 1.5f;
     private Transform target;
-    public bool playerTouch { get; private set; }
+    public bool playerTouch = false;
     private Vector2 movementDirection = Vector2.zero;
     private Vector2 MovementDirection { get { return movementDirection; } }
     private Rigidbody2D _rigidbody2D;
+    private MiniGameEnemyManager enemyManager;
 
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyManager = FindObjectOfType<MiniGameEnemyManager>();
     }
 
     private void FixedUpdate()
@@ -57,6 +59,7 @@ public class MiniGameEnemy : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerTouch = true;
+            enemyManager.StopGame();
         }
         else
         {

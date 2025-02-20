@@ -15,13 +15,26 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-        player = FindAnyObjectByType<PlayerController>();
-        _camera = FindAnyObjectByType<FollowCamera>();
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if(_enemyManager!= null)
+        {
+            _enemyManager.Init(this);
+        }
+
+        DontDestroyOnLoad(gameObject);
+
         _enemyManager = FindObjectOfType<MiniGameEnemyManager>();
-        _enemyManager.Init(this);
+        
         _doorManager = FindObjectOfType<DoorManager>();
-        enemy = GetComponent<MiniGameEnemy>();
         _timeUI = FindObjectOfType<TimeUI>();
     }
 
@@ -29,36 +42,19 @@ public class GameManager : MonoBehaviour
 
     public void StartMiniGame()
     {
-        _doorManager.GameUI.SetActive(false);
+        _doorManager.StartGame();
         _enemyManager.StartGame();
         _timeUI.StartTimer();
     }
 
     public void GameOver()
     {
-        _doorManager.GameUI.SetActive(true);
-        StopAllCoroutines();
         _timeUI.StopTimer();
+        _doorManager.StoppingGame();
     }
 
     private void Update()
     {
-        
-        //_doorManager.SetGameTime(gameTime);
-
-        //if (_doorManager.playerInGameZone)
-        //{
-        //    _enemyManager.StartGame();
-        //    gameTime += Time.deltaTime;
-
-        //}
-        //else if (!_doorManager.playerInGameZone)
-        //{
-        //    _enemyManager.StopGame();
-        //}
-        //if (_enemyManager.IsAnyEnemyTouchPlayer())
-        //{
-        //    _enemyManager.StopGame();
-        //}
+       
     }
 }
