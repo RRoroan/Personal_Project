@@ -7,8 +7,8 @@ public class TimeUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI GameTimeText;
     [SerializeField] private TextMeshProUGUI GameHighTimeText;
-    private float gameTime = 0f;
-    private float gameHighTime = 0f;
+    public float gameTime = 0f;
+    public float gameHighTime = 0f;
     private int minutes;
     private int seconds;
     private bool timerGoing;
@@ -69,7 +69,7 @@ public class TimeUI : MonoBehaviour
         
     }
 
-    private void UpdateHighScore()
+    public void UpdateHighScore()
     {
        int minutes = Mathf.FloorToInt(gameTime / 60);
        int seconds = Mathf.FloorToInt(gameTime % 60);

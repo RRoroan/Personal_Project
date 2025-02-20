@@ -1147,6 +1147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameTimeText: {fileID: 1587045483}
   GameHighTimeText: {fileID: 496218533}
+  gameTime: 0
+  gameHighTime: 0
 --- !u!1 &29731837
 GameObject:
   m_ObjectHideFlags: 0
@@ -7686,6 +7688,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7986cbcdbad84224d81125ee5390c711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highScoreText: {fileID: 0}
+  highscore: 0
 --- !u!1 &1587045481
 GameObject:
   m_ObjectHideFlags: 0
